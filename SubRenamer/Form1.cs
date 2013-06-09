@@ -269,16 +269,7 @@ namespace SubRenamer
 
         private void howToUseToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            try
-            {
-                var sysInfo = new Process();
-                sysInfo.StartInfo.FileName = ".\\help\\AboutPage.htm";
-                sysInfo.Start();
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Help was not found" + Environment.NewLine + "Try searching in Help folder manually");
-            }
+          Process.Start("https://github.com/van800/SubRenamer");
         }
 
         private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)

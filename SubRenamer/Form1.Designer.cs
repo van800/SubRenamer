@@ -143,7 +143,7 @@ namespace SubRenamer
       this.aboutToolStripMenuItem1.BackColor = System.Drawing.SystemColors.Control;
       this.aboutToolStripMenuItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
       this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
-      this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(134, 22);
+      this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
       this.aboutToolStripMenuItem1.Text = "About";
       this.aboutToolStripMenuItem1.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
       this.aboutToolStripMenuItem1.Click += new System.EventHandler(this.aboutToolStripMenuItem1_Click);
@@ -152,8 +152,8 @@ namespace SubRenamer
       // 
       this.howToUseToolStripMenuItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
       this.howToUseToolStripMenuItem1.Name = "howToUseToolStripMenuItem1";
-      this.howToUseToolStripMenuItem1.Size = new System.Drawing.Size(134, 22);
-      this.howToUseToolStripMenuItem1.Text = "How to use";
+      this.howToUseToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+      this.howToUseToolStripMenuItem1.Text = "Product page";
       this.howToUseToolStripMenuItem1.Click += new System.EventHandler(this.howToUseToolStripMenuItem1_Click);
       // 
       // toolStripContainer1
