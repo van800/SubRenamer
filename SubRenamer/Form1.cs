@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
@@ -64,8 +63,8 @@ namespace SubRenamer
             SubExtensions = subExtensions;
             
             InitializeComponent();
-            ((ToolStripDropDownMenu)((ToolStripDropDownItem)(Settings2DropDownButton1)).DropDown).ShowImageMargin = false;
-            ((ToolStripDropDownMenu)((ToolStripDropDownItem)(HelpDropDownButton3)).DropDown).ShowImageMargin = false;
+            ((ToolStripDropDownMenu)Settings2DropDownButton1.DropDown).ShowImageMargin = false;
+            ((ToolStripDropDownMenu)HelpDropDownButton3.DropDown).ShowImageMargin = false;
 
             _tsUserControl = new ToolStripUserControl(this);            //add usercontrol to drop down menu
             Settings2DropDownButton1.DropDownItems.Insert(0, _tsUserControl);
@@ -89,7 +88,7 @@ namespace SubRenamer
                     }
             }
             if (totalFileString != "")
-                updateStatusBarText(totalFileString);
+                UpdateStatusBarText(totalFileString);
             return totalFileString;
         }
 
@@ -105,7 +104,7 @@ namespace SubRenamer
                     }
             }
             if (totalFileString !="")
-                updateStatusBarText(totalFileString);
+                UpdateStatusBarText(totalFileString);
             return totalFileString;
         }
 
@@ -136,24 +135,18 @@ namespace SubRenamer
                 i = i + 1;
             }
             if (i > 1)
-                toolStripStatusLabel1.Text = toolStripStatusLabel1.Text + " ;" + " " + myStringArray[2];
+                toolStripStatusLabel1.Text = toolStripStatusLabel1.Text + " ; " + myStringArray[2];
             else
                 toolStripStatusLabel1.Text = myStringArray[3];
             textBoxSubs.Text = resultString;
             
         }
 
-        private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
-        {
-
-        }
-
-        private bool SourceFileExists(string fileName, int i)
+      private bool SourceFileExists(string fileName, int i)
         {
             if (!File.Exists(fileName))
             {
-                toolStripStatusLabel1.Text = "File" +" " +(i+1) + " " + "doesn't exist";
-//                MessageBox.Show("The source file does not exist!");
+                toolStripStatusLabel1.Text = string.Format("File {0} doesn't exist",(i+1));
                 return false;
             }
             else
@@ -163,7 +156,7 @@ namespace SubRenamer
  
         private void textBoxSubs_DragLeave(object sender, EventArgs e)
         {
-                textBoxSubs.BackColor = Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+                textBoxSubs.BackColor = Color.FromArgb(255, 255, 255);
         }
 
         private void textBoxSubs_DragEnter(object sender, DragEventArgs e)
@@ -172,7 +165,7 @@ namespace SubRenamer
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 e.Effect = DragDropEffects.Move;
-                textBoxSubs.BackColor = Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+                textBoxSubs.BackColor = Color.FromArgb(255, 255, 192);
             }
             else
             {
@@ -188,7 +181,7 @@ namespace SubRenamer
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 e.Effect = DragDropEffects.Move;
-                textBoxSubs.BackColor = Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+                textBoxSubs.BackColor = Color.FromArgb(255, 255, 255);
                 
                 //e.Data..GetDataPresent();
                 string[] filePaths = (string[])e.Data.GetData(DataFormats.FileDrop);
@@ -248,10 +241,9 @@ namespace SubRenamer
         {
             try
             {
-                Process SysInfo = new Process();
-                //SysInfo.StartInfo.ErrorDialog = true;
-                SysInfo.StartInfo.FileName = ".\\help\\AboutPage.htm";
-                SysInfo.Start();
+                var sysInfo = new Process();
+                sysInfo.StartInfo.FileName = ".\\help\\AboutPage.htm";
+                sysInfo.Start();
             }
             catch (Exception)
             {
@@ -261,23 +253,17 @@ namespace SubRenamer
 
         private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            AboutBox1 frm = new AboutBox1();
+            var frm = new AboutBox1();
             frm.Show();
         }
 
-        private void updateStatusBarText(string totalFileString)
+        private void UpdateStatusBarText(string totalFileString)
         {
             if (totalFileString != "")
                 toolStripStatusLabel1.Text = myStringArray[1];
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            PopUpManager<SettingsUC> puM =
-                PopUpManager<SettingsUC>.GetInstance(button1, false, true);
-        }
-
-        private void Settings2DropDownButton1_DropDownOpened(object sender, EventArgs e)
+      private void Settings2DropDownButton1_DropDownOpened(object sender, EventArgs e)
         {
 //            ((ToolStripDropDownMenu)((ToolStripDropDownItem)(sender)).DropDown).ShowImageMargin = false;
         }

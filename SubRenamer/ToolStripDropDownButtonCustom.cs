@@ -9,7 +9,7 @@ namespace SubRenamer
     {
         public ToolStripDropDownButtonCustom() : base() 
         {
-            ((ToolStripDropDownMenu)((ToolStripDropDownItem)(this)).DropDown).ShowImageMargin = false;
+            ((ToolStripDropDownMenu)this.DropDown).ShowImageMargin = false;
         }
     }
 }
