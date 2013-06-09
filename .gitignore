@@ -1,3 +1,7 @@
 /SubRenamer/bin
 /SubRenamer/obj
-/_ReSharper
+_ReSharper
+
+_ReSharper.SubRenamer
+/SubRenamer.sln.cache
+/SubRenamer.v11.suo

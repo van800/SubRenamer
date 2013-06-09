@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" InitialTargets="ValidateSolutionConfiguration;ValidateToolsVersions" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <UsingTask TaskName="JetBrains.ReSharper.Features.SolBuilderDuo.Engine.MsbuildExe.Filtering.MsbuildExeBuildLevelConditionalFilterTask" AssemblyFile="C:\Program Files (x86)\JetBrains\ReSharper\v8.0\Bin\JetBrains.ReSharper.Features.SolBuilderDuo.dll" />
+  <UsingTask TaskName="JetBrains.ReSharper.Features.SolBuilderDuo.Engine.MsbuildExe.Filtering.CollectProjectInfoTask" AssemblyFile="C:\Program Files (x86)\JetBrains\ReSharper\v8.0\Bin\JetBrains.ReSharper.Features.SolBuilderDuo.dll" />
+  <UsingTask TaskName="JetBrains.ReSharper.Features.SolBuilderDuo.Engine.MsbuildExe.Filtering.LevelBeginTask" AssemblyFile="C:\Program Files (x86)\JetBrains\ReSharper\v8.0\Bin\JetBrains.ReSharper.Features.SolBuilderDuo.dll" />
+  <UsingTask TaskName="JetBrains.ReSharper.Features.SolBuilderDuo.Engine.MsbuildExe.Filtering.LevelEndTask" AssemblyFile="C:\Program Files (x86)\JetBrains\ReSharper\v8.0\Bin\JetBrains.ReSharper.Features.SolBuilderDuo.dll" />
+  <PropertyGroup>
+    <_SolutionProjectConfiguration>Debug|Any CPU</_SolutionProjectConfiguration>
+    <_SolutionProjectToolsVersion>4.0</_SolutionProjectToolsVersion>
+    <_SolutionProjectCacheVersion>4.0</_SolutionProjectCacheVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <_SolutionProjectProjects Include="SubRenamer\SubRenamer.csproj" />
+  </ItemGroup>
+  <ItemGroup Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') ">
+    <BuildLevel0 Include="SubRenamer\SubRenamer.csproj">
+      <Configuration>Debug</Configuration>
+      <Platform>AnyCPU</Platform>
+    </BuildLevel0>
+  </ItemGroup>
+  <ItemGroup Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Any CPU') ">
+    <BuildLevel0 Include="SubRenamer\SubRenamer.csproj">
+      <Configuration>Release</Configuration>
+      <Platform>AnyCPU</Platform>
+    </BuildLevel0>
+  </ItemGroup>
+  <UsingTask TaskName="Microsoft.Build.Tasks.CreateTemporaryVCProject" AssemblyName="Microsoft.Build.Tasks.v3.5, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <UsingTask TaskName="Microsoft.Build.Tasks.ResolveVCProjectOutput" AssemblyName="Microsoft.Build.Tasks.v3.5, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <PropertyGroup Condition=" '$(Configuration)' == '' ">
+    <Configuration>Debug</Configuration>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == '' ">
+    <Platform>Any CPU</Platform>
+  </PropertyGroup>
+  <PropertyGroup Condition=" ('$(AspNetConfiguration)' == '') ">
+    <AspNetConfiguration>$(Configuration)</AspNetConfiguration>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SolutionDir>C:\Work\SubRenamer\</SolutionDir>
+    <SolutionExt>.sln</SolutionExt>
+    <SolutionFileName>SubRenamer.sln</SolutionFileName>
+    <SolutionName>SubRenamer</SolutionName>
+    <SolutionPath>C:\Work\SubRenamer\SubRenamer.sln</SolutionPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetFrameworkVersion Condition="'$(TargetFrameworkVersion)' == '' and '$(MSBuildToolsVersion)' == '2.0'">v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion Condition="'$(TargetFrameworkVersion)' == '' and ('$(MSBuildToolsVersion)' == '3.5' or '$(MSBuildToolsVersion)' == '3.0')">v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion Condition="'$(TargetFrameworkVersion)' == '' and '$(MSBuildToolsVersion)' == '4.0'">v4.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') ">
+    <CurrentSolutionConfigurationContents>
+      <SolutionConfiguration xmlns="">
+        <ProjectConfiguration Project="{C3998E42-632D-4E7A-94B6-A970BBACBB0D}">Debug|AnyCPU</ProjectConfiguration>
+      </SolutionConfiguration>
+    </CurrentSolutionConfigurationContents>
+  </PropertyGroup>
+  <PropertyGroup Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Any CPU') ">
+    <CurrentSolutionConfigurationContents>
+      <SolutionConfiguration xmlns="">
+        <ProjectConfiguration Project="{C3998E42-632D-4E7A-94B6-A970BBACBB0D}">Release|AnyCPU</ProjectConfiguration>
+      </SolutionConfiguration>
+    </CurrentSolutionConfigurationContents>
+  </PropertyGroup>
+  <Target Name="ValidateSolutionConfiguration">
+    <Error Text="The specified solution configuration &quot;$(Configuration)|$(Platform)&quot; is invalid. Please specify a valid solution configuration using the Configuration and Platform properties (e.g. MSBuild.exe Solution.sln /p:Configuration=Debug /p:Platform=&quot;Any CPU&quot;) or leave those properties blank to use the default solution configuration." Code="MSB4126" HelpKeyword="MSBuild.SolutionInvalidSolutionConfiguration" Condition="('$(CurrentSolutionConfigurationContents)' == '') and ('$(SkipInvalidConfigurations)' != 'true')" />
+    <Warning Text="The specified solution configuration &quot;$(Configuration)|$(Platform)&quot; is invalid. Please specify a valid solution configuration using the Configuration and Platform properties (e.g. MSBuild.exe Solution.sln /p:Configuration=Debug /p:Platform=&quot;Any CPU&quot;) or leave those properties blank to use the default solution configuration." Code="MSB4126" HelpKeyword="MSBuild.SolutionInvalidSolutionConfiguration" Condition="('$(CurrentSolutionConfigurationContents)' == '') and ('$(SkipInvalidConfigurations)' == 'true')" />
+    <Message Text="Building solution configuration &quot;$(Configuration)|$(Platform)&quot;." Condition="'$(CurrentSolutionConfigurationContents)' != ''" />
+  </Target>
+  <Target Name="ValidateToolsVersions">
+    <Error Text="The tools version &quot;$(MSBuildToolsVersion)&quot; of the solution does not support building projects with a different tools version." Code="MSB4149" HelpKeyword="MSBuild.SolutionToolsVersionDoesNotSupportProjectToolsVersion" Condition="'$(MSBuildToolsVersion)' == '2.0' and ('$(ProjectToolsVersion)' != '2.0' and '$(ProjectToolsVersion)' != '')" />
+  </Target>
+  <Target Name="SubRenamer" Condition="'$(CurrentSolutionConfigurationContents)' != ''" Outputs="@(SubRenamerBuildOutput)">
+    <MSBuild Projects="SubRenamer\SubRenamer.csproj" Properties="Configuration=Debug; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') ">
+      <Output TaskParameter="TargetOutputs" ItemName="SubRenamerBuildOutput" />
+    </MSBuild>
+    <MSBuild Projects="SubRenamer\SubRenamer.csproj" Properties="Configuration=Release; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Any CPU') ">
+      <Output TaskParameter="TargetOutputs" ItemName="SubRenamerBuildOutput" />
+    </MSBuild>
+  </Target>
+  <Target Name="SubRenamer:Clean" Condition="'$(CurrentSolutionConfigurationContents)' != ''">
+    <MSBuild Projects="SubRenamer\SubRenamer.csproj" Targets="Clean" Properties="Configuration=Debug; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') " />
+    <MSBuild Projects="SubRenamer\SubRenamer.csproj" Targets="Clean" Properties="Configuration=Release; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Any CPU') " />
+  </Target>
+  <Target Name="SubRenamer:Rebuild" Condition="'$(CurrentSolutionConfigurationContents)' != ''" Outputs="@(SubRenamerBuildOutput)">
+    <MSBuild Projects="SubRenamer\SubRenamer.csproj" Targets="Rebuild" Properties="Configuration=Debug; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') ">
+      <Output TaskParameter="TargetOutputs" ItemName="SubRenamerBuildOutput" />
+    </MSBuild>
+    <MSBuild Projects="SubRenamer\SubRenamer.csproj" Targets="Rebuild" Properties="Configuration=Release; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Any CPU') ">
+      <Output TaskParameter="TargetOutputs" ItemName="SubRenamerBuildOutput" />
+    </MSBuild>
+  </Target>
+  <Target Name="SubRenamer:Publish" Condition="'$(CurrentSolutionConfigurationContents)' != ''">
+    <MSBuild Projects="SubRenamer\SubRenamer.csproj" Targets="Publish" Properties="Configuration=Debug; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Debug') and ('$(Platform)' == 'Any CPU') " />
+    <MSBuild Projects="SubRenamer\SubRenamer.csproj" Targets="Publish" Properties="Configuration=Release; Platform=AnyCPU; BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" ToolsVersion="$(ProjectToolsVersion)" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" Condition=" ('$(Configuration)' == 'Release') and ('$(Platform)' == 'Any CPU') " />
+  </Target>
+  <Target Name="Build" Condition="'$(CurrentSolutionConfigurationContents)' != ''" Outputs="@(CollectedBuildOutput)">
+    <!--vvv Begin Level 0 vvv-->
+    <JetBrains.ReSharper.Features.SolBuilderDuo.Engine.MsbuildExe.Filtering.LevelBeginTask Level="0" Projects="@(BuildLevel0)" />
+    <JetBrains.ReSharper.Features.SolBuilderDuo.Engine.MsbuildExe.Filtering.CollectProjectInfoTask Project="%(BuildLevel0.Identity)" Properties="Configuration=%(BuildLevel0.Configuration); Platform=%(BuildLevel0.Platform); BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath); BuildProjectReferences=False" />
+    <JetBrains.ReSharper.Features.SolBuilderDuo.Engine.MsbuildExe.Filtering.MsbuildExeBuildLevelConditionalFilterTask Input="@(BuildLevel0)" Level="0">
+      <Output TaskParameter="BreakingChanges" ItemName="BuildLevelBreakingChanges0" />
+      <Output TaskParameter="NonBreakingChanges" ItemName="BuildLevelNonBreakingChanges0" />
+      <Output TaskParameter="NoChanges" ItemName="BuildLevelNoChanges0" />
+    </JetBrains.ReSharper.Features.SolBuilderDuo.Engine.MsbuildExe.Filtering.MsbuildExeBuildLevelConditionalFilterTask>
+    <Message Importance="Low" Text="Build Level Projects at level 0, Up-to-Date Projects: @(BuildLevel0)." />
+    <Message Importance="Low" Text="Build Level Projects at level 0, Projects with Breaking Changes: @(BuildLevelBreakingChanges0)." />
+    <Message Importance="Low" Text="Build Level Projects at level 0, Projects with Non-Breaking Changes: @(BuildLevelNonBreakingChanges0)." />
+    <Message Importance="Low" Text="Build Level Projects at level 0, Up-to-Date Projects: @(BuildLevelNoChanges0)." />
+    <MSBuild Condition="@(BuildLevelBreakingChanges0) != ''" Projects="@(BuildLevelBreakingChanges0)" Properties="Configuration=%(Configuration); Platform=%(Platform); BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath); BuildProjectReferences=False" ToolsVersion="$(ProjectToolsVersion)" BuildInParallel="true" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)">
+      <Output TaskParameter="TargetOutputs" ItemName="CollectedBuildOutput" />
+    </MSBuild>
+    <MSBuild Projects="@(BuildLevelNonBreakingChanges0)" Condition="@(BuildLevelNonBreakingChanges0) != ''" Targets="ResolveProjectReferences; ResolveAssemblyReferences; _CopyFilesMarkedCopyLocal" Properties="Configuration=%(Configuration); Platform=%(Platform); BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath); BuildProjectReferences=False; BuildProjectReferences=False" ToolsVersion="$(ProjectToolsVersion)" BuildInParallel="true" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" />
+    <Message Importance="Normal" Text="Copying references to output folders on projects that were not build because they have no changes, and changes in their references are non-sensitive: @(BuildLevelNonBreakingChanges0)." />
+    <!--^^^ End Level 0 ^^^-->
+    <JetBrains.ReSharper.Features.SolBuilderDuo.Engine.MsbuildExe.Filtering.LevelEndTask Level="0" Projects="@(BuildLevel0)" NoChanges="@(BuildLevelNoChanges0)" BreakingChanges="@(BuildLevelBreakingChanges0)" NonBreakingChanges="@(BuildLevelNonBreakingChanges0)" />
+    <Message Text="The project &quot;%(SkipLevel0.Identity)&quot; is not selected for building in solution configuration &quot;$(Configuration)|$(Platform)&quot;." Condition="@(SkipLevel0) != ''" />
+    <Warning Text="The project configuration for project &quot;%(MissingConfigLevel0.Identity)&quot; was not specified in the solution file for the solution configuration &quot;$(Configuration)|$(Platform)&quot;." Code="MSB4121" HelpKeyword="MSBuild.SolutionProjectConfigurationMissing" Condition="@(MissingConfigLevel0) != ''" />
+  </Target>
+  <Target Name="Clean" Condition="'$(CurrentSolutionConfigurationContents)' != ''">
+    <!--vvv Begin Level 0 vvv-->
+    <JetBrains.ReSharper.Features.SolBuilderDuo.Engine.MsbuildExe.Filtering.LevelBeginTask Level="0" Projects="@(BuildLevel0)" />
+    <JetBrains.ReSharper.Features.SolBuilderDuo.Engine.MsbuildExe.Filtering.CollectProjectInfoTask Project="%(BuildLevel0.Identity)" Properties="Configuration=%(BuildLevel0.Configuration); Platform=%(BuildLevel0.Platform); BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath); BuildProjectReferences=False" />
+    <JetBrains.ReSharper.Features.SolBuilderDuo.Engine.MsbuildExe.Filtering.MsbuildExeBuildLevelConditionalFilterTask Input="@(BuildLevel0)" Level="0">
+      <Output TaskParameter="BreakingChanges" ItemName="BuildLevelBreakingChanges0" />
+      <Output TaskParameter="NonBreakingChanges" ItemName="BuildLevelNonBreakingChanges0" />
+      <Output TaskParameter="NoChanges" ItemName="BuildLevelNoChanges0" />
+    </JetBrains.ReSharper.Features.SolBuilderDuo.Engine.MsbuildExe.Filtering.MsbuildExeBuildLevelConditionalFilterTask>
+    <Message Importance="Low" Text="Build Level Projects at level 0, Up-to-Date Projects: @(BuildLevel0)." />
+    <Message Importance="Low" Text="Build Level Projects at level 0, Projects with Breaking Changes: @(BuildLevelBreakingChanges0)." />
+    <Message Importance="Low" Text="Build Level Projects at level 0, Projects with Non-Breaking Changes: @(BuildLevelNonBreakingChanges0)." />
+    <Message Importance="Low" Text="Build Level Projects at level 0, Up-to-Date Projects: @(BuildLevelNoChanges0)." />
+    <MSBuild Condition="@(BuildLevelBreakingChanges0) != ''" Projects="@(BuildLevelBreakingChanges0)" Properties="Configuration=%(Configuration); Platform=%(Platform); BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath); BuildProjectReferences=False" Targets="Clean" ToolsVersion="$(ProjectToolsVersion)" BuildInParallel="true" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" />
+    <MSBuild Projects="@(BuildLevelNonBreakingChanges0)" Condition="@(BuildLevelNonBreakingChanges0) != ''" Targets="ResolveProjectReferences; ResolveAssemblyReferences; _CopyFilesMarkedCopyLocal" Properties="Configuration=%(Configuration); Platform=%(Platform); BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath); BuildProjectReferences=False; BuildProjectReferences=False" ToolsVersion="$(ProjectToolsVersion)" BuildInParallel="true" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" />
+    <Message Importance="Normal" Text="Copying references to output folders on projects that were not build because they have no changes, and changes in their references are non-sensitive: @(BuildLevelNonBreakingChanges0)." />
+    <!--^^^ End Level 0 ^^^-->
+    <JetBrains.ReSharper.Features.SolBuilderDuo.Engine.MsbuildExe.Filtering.LevelEndTask Level="0" Projects="@(BuildLevel0)" NoChanges="@(BuildLevelNoChanges0)" BreakingChanges="@(BuildLevelBreakingChanges0)" NonBreakingChanges="@(BuildLevelNonBreakingChanges0)" />
+    <Message Text="The project &quot;%(SkipLevel0.Identity)&quot; is not selected for building in solution configuration &quot;$(Configuration)|$(Platform)&quot;." Condition="@(SkipLevel0) != ''" />
+    <Warning Text="The project configuration for project &quot;%(MissingConfigLevel0.Identity)&quot; was not specified in the solution file for the solution configuration &quot;$(Configuration)|$(Platform)&quot;." Code="MSB4121" HelpKeyword="MSBuild.SolutionProjectConfigurationMissing" Condition="@(MissingConfigLevel0) != ''" />
+    <Delete Files="SubRenamer.sln.cache" />
+  </Target>
+  <Target Name="Rebuild" Condition="'$(CurrentSolutionConfigurationContents)' != ''" Outputs="@(CollectedBuildOutput)">
+    <!--vvv Begin Level 0 vvv-->
+    <JetBrains.ReSharper.Features.SolBuilderDuo.Engine.MsbuildExe.Filtering.LevelBeginTask Level="0" Projects="@(BuildLevel0)" />
+    <JetBrains.ReSharper.Features.SolBuilderDuo.Engine.MsbuildExe.Filtering.CollectProjectInfoTask Project="%(BuildLevel0.Identity)" Properties="Configuration=%(BuildLevel0.Configuration); Platform=%(BuildLevel0.Platform); BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath); BuildProjectReferences=False" />
+    <JetBrains.ReSharper.Features.SolBuilderDuo.Engine.MsbuildExe.Filtering.MsbuildExeBuildLevelConditionalFilterTask Input="@(BuildLevel0)" Level="0">
+      <Output TaskParameter="BreakingChanges" ItemName="BuildLevelBreakingChanges0" />
+      <Output TaskParameter="NonBreakingChanges" ItemName="BuildLevelNonBreakingChanges0" />
+      <Output TaskParameter="NoChanges" ItemName="BuildLevelNoChanges0" />
+    </JetBrains.ReSharper.Features.SolBuilderDuo.Engine.MsbuildExe.Filtering.MsbuildExeBuildLevelConditionalFilterTask>
+    <Message Importance="Low" Text="Build Level Projects at level 0, Up-to-Date Projects: @(BuildLevel0)." />
+    <Message Importance="Low" Text="Build Level Projects at level 0, Projects with Breaking Changes: @(BuildLevelBreakingChanges0)." />
+    <Message Importance="Low" Text="Build Level Projects at level 0, Projects with Non-Breaking Changes: @(BuildLevelNonBreakingChanges0)." />
+    <Message Importance="Low" Text="Build Level Projects at level 0, Up-to-Date Projects: @(BuildLevelNoChanges0)." />
+    <MSBuild Condition="@(BuildLevelBreakingChanges0) != ''" Projects="@(BuildLevelBreakingChanges0)" Properties="Configuration=%(Configuration); Platform=%(Platform); BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath); BuildProjectReferences=False" Targets="Rebuild" ToolsVersion="$(ProjectToolsVersion)" BuildInParallel="true" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)">
+      <Output TaskParameter="TargetOutputs" ItemName="CollectedBuildOutput" />
+    </MSBuild>
+    <MSBuild Projects="@(BuildLevelNonBreakingChanges0)" Condition="@(BuildLevelNonBreakingChanges0) != ''" Targets="ResolveProjectReferences; ResolveAssemblyReferences; _CopyFilesMarkedCopyLocal" Properties="Configuration=%(Configuration); Platform=%(Platform); BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath); BuildProjectReferences=False; BuildProjectReferences=False" ToolsVersion="$(ProjectToolsVersion)" BuildInParallel="true" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" />
+    <Message Importance="Normal" Text="Copying references to output folders on projects that were not build because they have no changes, and changes in their references are non-sensitive: @(BuildLevelNonBreakingChanges0)." />
+    <!--^^^ End Level 0 ^^^-->
+    <JetBrains.ReSharper.Features.SolBuilderDuo.Engine.MsbuildExe.Filtering.LevelEndTask Level="0" Projects="@(BuildLevel0)" NoChanges="@(BuildLevelNoChanges0)" BreakingChanges="@(BuildLevelBreakingChanges0)" NonBreakingChanges="@(BuildLevelNonBreakingChanges0)" />
+    <Message Text="The project &quot;%(SkipLevel0.Identity)&quot; is not selected for building in solution configuration &quot;$(Configuration)|$(Platform)&quot;." Condition="@(SkipLevel0) != ''" />
+    <Warning Text="The project configuration for project &quot;%(MissingConfigLevel0.Identity)&quot; was not specified in the solution file for the solution configuration &quot;$(Configuration)|$(Platform)&quot;." Code="MSB4121" HelpKeyword="MSBuild.SolutionProjectConfigurationMissing" Condition="@(MissingConfigLevel0) != ''" />
+  </Target>
+  <Target Name="Publish" Condition="'$(CurrentSolutionConfigurationContents)' != ''">
+    <MSBuild Condition="@(BuildLevel0) != ''" Projects="@(BuildLevel0)" Properties="Configuration=%(Configuration); Platform=%(Platform); BuildingSolutionFile=true; CurrentSolutionConfigurationContents=$(CurrentSolutionConfigurationContents); SolutionDir=$(SolutionDir); SolutionExt=$(SolutionExt); SolutionFileName=$(SolutionFileName); SolutionName=$(SolutionName); SolutionPath=$(SolutionPath)" Targets="Publish" ToolsVersion="$(ProjectToolsVersion)" BuildInParallel="true" UnloadProjectsOnCompletion="$(UnloadProjectsOnCompletion)" UseResultsCache="$(UseResultsCache)" />
+    <Message Text="The project &quot;%(SkipLevel0.Identity)&quot; is not selected for building in solution configuration &quot;$(Configuration)|$(Platform)&quot;." Condition="@(SkipLevel0) != ''" />
+    <Warning Text="The project configuration for project &quot;%(MissingConfigLevel0.Identity)&quot; was not specified in the solution file for the solution configuration &quot;$(Configuration)|$(Platform)&quot;." Code="MSB4121" HelpKeyword="MSBuild.SolutionProjectConfigurationMissing" Condition="@(MissingConfigLevel0) != ''" />
+  </Target>
+</Project>
