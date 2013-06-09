@@ -1,0 +1,35 @@
+# This is the response file for the SubRenamer.exe application
+
+# External assembly references.
+/r:System.dll
+/r:System.Core.dll
+/r:System.Data.dll
+/r:System.Data.DataSetExtensions.dll
+/r:System.Deployment.dll
+/r:System.Drawing.dll
+/r:System.Windows.Forms.dll
+/r:System.Xml.dll
+/reference:System.Xml.Linq.dll
+/reference:mscorlib.dll
+
+# output and files to compile
+/target:winexe 
+/out:bin\Debug\SubRenamer.exe
+/debug
+#/bugreport:bin\Debug\systemlog.txt
+/errorreport:prompt
+#/pdb:bin\Debug\SubRenamer.pdb 
+/recurse:*.cs
+#*.cs Properties\*.cs 
+
+#Res
+#/resource:Form1.resx
+#/resource:AboutBox1.resx
+#/resource:Properties\Resources.resx
+/resource:SubRenamer.AboutBox1.resources
+/resource:SubRenamer.Properties.Resources.resources
+/resource:SubRenamer.Form1.resources
+
+
+#icon
+/win32icon:icon2.ico
