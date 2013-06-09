@@ -30,7 +30,7 @@ namespace SubRenamer
         public UserControl1(ParentForm myForm)
         {
             InitializeComponent();
-            backColor = this.BackColor;
+            backColor = BackColor;
 
             m_frmParent = myForm;
             textBoxWithVideoExts.Text = m_frmParent.VideoExtensions.ToString();
@@ -43,7 +43,7 @@ namespace SubRenamer
         public UserControl1(ParentForm myForm, Color backColor)
         {
             InitializeComponent();
-            this.BackColor = backColor;
+            BackColor = backColor;
 
             m_frmParent = myForm;
             textBoxWithVideoExts.Text = m_frmParent.VideoExtensions.ToString();

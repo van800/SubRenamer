@@ -62,69 +62,13 @@ namespace SubRenamer
         {
             VideoExtensions = videoExtensions;
             SubExtensions = subExtensions;
-
             
             InitializeComponent();
             ((ToolStripDropDownMenu)((ToolStripDropDownItem)(Settings2DropDownButton1)).DropDown).ShowImageMargin = false;
             ((ToolStripDropDownMenu)((ToolStripDropDownItem)(HelpDropDownButton3)).DropDown).ShowImageMargin = false;
 
-            this._tsUserControl = new ToolStripUserControl(this);            //add usercontrol to drop down menu
-            this.Settings2DropDownButton1.DropDownItems.Insert(0, this._tsUserControl);
-            
-
-            //this.HelpDropDownButton3 = new System.Windows.Forms.ToolStripDropDownButton();
-            //this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            //this.howToUseToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            //this.HelpDropDownButton3.DropDown = new ContextMenuStrip();
-            //((ContextMenuStrip)HelpDropDownButton3.DropDown).ShowImageMargin = false;
-            //this.Settings2DropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
-            //this._tsUserControl = new ToolStripUserControl(this);            //add usercontrol to drop down menu
-            ////(ContextMenuStrip)_tsUserControl.
-
-            //this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            //this.Settings2DropDownButton1,
-            //this.HelpDropDownButton3});
-            
-            //// 
-            //// aboutToolStripMenuItem1
-            //// 
-            //this.aboutToolStripMenuItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            //this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
-            //this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(128, 22);
-            //this.aboutToolStripMenuItem1.Text = "About";
-            //this.aboutToolStripMenuItem1.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
-            //this.aboutToolStripMenuItem1.Click += new System.EventHandler(this.aboutToolStripMenuItem1_Click);
-            //// 
-            //// howToUseToolStripMenuItem1
-            //// 
-            //this.howToUseToolStripMenuItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            //this.howToUseToolStripMenuItem1.Name = "howToUseToolStripMenuItem1";
-            //this.howToUseToolStripMenuItem1.Size = new System.Drawing.Size(128, 22);
-            //this.howToUseToolStripMenuItem1.Text = "How to use";
-            //this.howToUseToolStripMenuItem1.Click += new System.EventHandler(this.howToUseToolStripMenuItem1_Click);
-            //// 
-            //// HelpDropDownButton3
-            //// 
-            //this.HelpDropDownButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            //this.HelpDropDownButton3.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            //this.aboutToolStripMenuItem1,
-            //this.howToUseToolStripMenuItem1});
-            //this.HelpDropDownButton3.Name = "HelpDropDownButton2";
-            //this.HelpDropDownButton3.Size = new System.Drawing.Size(41, 22);
-            //this.HelpDropDownButton3.Text = "Help";
-
-
-            //// 
-            //// Settings2DropDownButton1
-            //// 
-            //this.Settings2DropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            //this.Settings2DropDownButton1.DropDownItems.Insert(0, this._tsUserControl);            
-            //this.Settings2DropDownButton1.Name = "Settings2DropDownButton1";
-            //this.Settings2DropDownButton1.Size = new System.Drawing.Size(59, 22);
-            //this.Settings2DropDownButton1.Text = "Settings";
-            //this.Settings2DropDownButton1.DropDownOpened += new System.EventHandler(this.Settings2DropDownButton1_DropDownOpened);
-            
- 
+            _tsUserControl = new ToolStripUserControl(this);            //add usercontrol to drop down menu
+            Settings2DropDownButton1.DropDownItems.Insert(0, _tsUserControl);
 
             string allFiles="";
             foreach (string arg in args)
@@ -169,7 +113,7 @@ namespace SubRenamer
         private void btnRename_Click(object sender, EventArgs e)
         {
             string[] separator = new string[1];
-            separator[0]= System.Convert.ToString(Environment.NewLine);
+            separator[0]= Convert.ToString(Environment.NewLine);
             string[] sourceText = textBoxSubs.Text.Split(separator, StringSplitOptions.None);
             string[] newNames = textBoxVideos.Text.Split(separator, StringSplitOptions.None);
             int i = 0;
@@ -181,7 +125,7 @@ namespace SubRenamer
                     if (SourceFileExists(fileName,i))
                     {
                         string newFileName = Path.GetDirectoryName(newNames[i]).ToString() + "\\" + Path.GetFileNameWithoutExtension(newNames[i]).ToString() + Path.GetExtension(fileName).ToString();
-                        System.IO.File.Move(fileName, newFileName);
+                        File.Move(fileName, newFileName);
                         resultString = resultString + newFileName + Environment.NewLine;
                     }
                 }
@@ -207,7 +151,7 @@ namespace SubRenamer
 
         private bool SourceFileExists(string fileName, int i)
         {
-            if (!System.IO.File.Exists(fileName))
+            if (!File.Exists(fileName))
             {
                 toolStripStatusLabel1.Text = "File" +" " +(i+1) + " " + "doesn't exist";
 //                MessageBox.Show("The source file does not exist!");
@@ -220,16 +164,16 @@ namespace SubRenamer
  
         private void textBoxSubs_DragLeave(object sender, EventArgs e)
         {
-                textBoxSubs.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+                textBoxSubs.BackColor = Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
         }
 
         private void textBoxSubs_DragEnter(object sender, DragEventArgs e)
         {
 
-            if (e.Data.GetDataPresent(System.Windows.Forms.DataFormats.FileDrop))
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 e.Effect = DragDropEffects.Move;
-                textBoxSubs.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+                textBoxSubs.BackColor = Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             }
             else
             {
@@ -239,16 +183,16 @@ namespace SubRenamer
 
         private void textBoxSubs_DragDrop(object sender, DragEventArgs e)
         {
-            Debug.WriteLine("test" + this.ToString());
+            Debug.WriteLine("test" + ToString());
             
             
-            if (e.Data.GetDataPresent(System.Windows.Forms.DataFormats.FileDrop))
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 e.Effect = DragDropEffects.Move;
-                textBoxSubs.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+                textBoxSubs.BackColor = Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
                 
                 //e.Data..GetDataPresent();
-                string[] filePaths = (string[])e.Data.GetData(System.Windows.Forms.DataFormats.FileDrop);
+                string[] filePaths = (string[])e.Data.GetData(DataFormats.FileDrop);
                 List<string> fileNames = new List<string>();
 
                 foreach (string filePath in filePaths)
@@ -272,28 +216,12 @@ namespace SubRenamer
             
         }
 
-        private void textBoxSubs_MouseHover(object sender, EventArgs e)
-        {
-            if (textBoxSubs.Text == "")
-            {
-                toolTip1.SetToolTip(textBoxSubs, "Drag and drop your files here from Windows Explorer");
-                toolTip1.Active = true;
-                toolTip1.GetToolTip(this.textBoxSubs);
-            }
-        }
-
-        private void textBoxSubs_MouseLeave(object sender, EventArgs e)
-        {
-            toolTip1.Active = false;
-        }
-
         private void browseFilesButton1_Click(object sender, EventArgs e)
         {
             openFileDialog3.InitialDirectory = StartFolderString;
             openFileDialog3.Title = "Select Videos and Subs";
             openFileDialog3.Filter = "Video and Subs|" + VideoExtensions.ToStringCustom()+";" + SubExtensions.ToStringCustom() + "|All files (*.*)|*.*";//*.BMP;*.JPG;*.GIF
             openFileDialog3.FilterIndex = 0;
-            //openFileDialog3.RestoreDirectory = true;
             openFileDialog3.Multiselect = true;
  
 
@@ -317,11 +245,6 @@ namespace SubRenamer
             }
         }
 
-        //private void ExitButton1_Click(object sender, EventArgs e)
-        //{
-        //    Application.Exit();
-        //}
-
         private void howToUseToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             try
@@ -337,33 +260,11 @@ namespace SubRenamer
             }
         }
 
-    //    private void SettingsButton1_Click(object sender, EventArgs e)
-    //    {
-    //        //ChildForm mySettingsForm = new ChildForm(this);
-    //        //mySettingsForm.Show();
-    ////        PopUpManager<UserControl1> puM =
-    ////PopUpManager<UserControl1>.GetInstance((Control)SettingsButton1, false, true);
-
-    //        this.SettingsButton1.DropDown = new ContextMenuStrip();
-    //        ((ContextMenuStrip)SettingsButton1.DropDown).ShowImageMargin = false;
-
-    //    }
-
         private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             AboutBox1 frm = new AboutBox1();
             frm.Show();
         }
-
-        //private void toolStripVideoTextBox_TextChanged(object sender, EventArgs e)
-        //{
-        //    VideoExtensions = ExtensionList.Parse(toolStripVideoTextBox.Text);
-        //}
-
-        //private void toolStripSubsTextBox_TextChanged(object sender, EventArgs e)
-        //{
-        //    SubExtensions = ExtensionList.Parse(toolStripSubsTextBox.Text);
-        //}
 
         private void updateStatusBarText(string totalFileString)
         {
@@ -381,30 +282,6 @@ namespace SubRenamer
         {
 //            ((ToolStripDropDownMenu)((ToolStripDropDownItem)(sender)).DropDown).ShowImageMargin = false;
         }
-
-        //private void SettingsDropDownButton3_Click_1(object sender, EventArgs e)
-        //{
-        //    this.SettingsDropDownButton3.DropDown = new ContextMenuStrip();
-        //    ((ContextMenuStrip)SettingsDropDownButton3.DropDown).ShowImageMargin = false;
-        //    // 
-        //    // SettingsButton1
-        //    // 
-        //    this.SettingsDropDownButton3.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-        //    this.toolStripVideoTextBox,
-        //    this.toolStripSubsTextBox});
-        //}
-
-        //private void toolStripButton1_Click(object sender, EventArgs e)
-        //{
-        //    ChildForm mySettingsForm = new ChildForm(this);
-        //    mySettingsForm.Show();
-        //    //UserControl1 userControl1 = new UserControl1();
-        //    ////userControl1.Location = this.Location;
-        //    //userControl1.Show();
-        //}
-
-
-
     }
 }
 

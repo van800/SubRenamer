@@ -71,7 +71,7 @@ namespace SubRenamer
             #endregion
             if (videoExtensions ==null ||videoExtensions.ToString() == "")
             {
-                    videoExtensions = ExtensionList.Parse(".avi;.mkv;.ogm;.mpeg;.mpg;.vid;.xvid;"); 
+              videoExtensions = ExtensionList.Parse(".avi;.mkv;.ogm;.mpeg;.mpg;.vid;.xvid;.m4v;.wmv;"); 
             }
 
             if (subExtensions == null|| subExtensions.ToString() == "")
