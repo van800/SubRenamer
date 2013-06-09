@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
@@ -18,16 +17,15 @@ namespace SubRenamer
         private ExtensionList vidExt;
         private ExtensionList subExt;
 
-        string[] myStringArray = new string[] 
+        string[] myStringArray =
         {
-            "Please add files",
-            "If necessary resort the filenames and press Rename",
-            "",
-            "Nothing renamed"
+          "Please add files",
+          "If necessary resort the filenames and press Rename",
+          "",
+          "Nothing renamed"
         };
 
-
-        public ExtensionList VideoExtensions
+      public ExtensionList VideoExtensions
         {
             get
             {
@@ -120,12 +118,18 @@ namespace SubRenamer
             {
                 try
                 {
-                    if (SourceFileExists(fileName,i))
-                    {
-                        string newFileName = Path.GetDirectoryName(newNames[i]) + "\\" + Path.GetFileNameWithoutExtension(newNames[i]) + Path.GetExtension(fileName);
-                        File.Move(fileName, newFileName);
-                        resultString = resultString + newFileName + Environment.NewLine;
-                    }
+                  if (SourceFileExists(fileName, i))
+                  {
+                    var nameWithExtension = Path.GetFileNameWithoutExtension(newNames[i]) + Path.GetExtension(fileName);
+                    var dir = Path.GetDirectoryName(newNames[i]);
+                    string newFileName = Path.Combine(dir, nameWithExtension);
+                    File.Move(fileName, newFileName);
+                    resultString = resultString + newFileName + Environment.NewLine;
+
+                    if (_tsUserControl.ConvertToUtf8)
+                      ConvertToUtf8(newFileName);
+                    
+                  }
                 }
                 catch (Exception)
                 {
@@ -142,19 +146,45 @@ namespace SubRenamer
             
         }
 
-      private bool SourceFileExists(string fileName, int i)
+      private void ConvertToUtf8(string fileName)
+      {
+        string charset = null;
+        using (FileStream fs = File.OpenRead(fileName))
         {
-            if (!File.Exists(fileName))
+          var cdet = new Ude.CharsetDetector();
+          cdet.Feed(fs);
+          cdet.DataEnd();
+          charset = cdet.Charset;
+        }
+
+        if (charset != null)
+        {
+          var text = string.Empty;
+          using (var reader = new StreamReader(fileName, Encoding.GetEncoding(charset)))
+          {
+            text = reader.ReadToEnd();
+          }
+
+          using (var writer = new StreamWriter(fileName, false, Encoding.UTF8))
+          {
+            if (text.Length > 0)
+              writer.Write(text);
+          }  
+        }
+      }
+
+      private bool SourceFileExists(string fileName, int i)
+      {
+        if (!File.Exists(fileName))
             {
                 toolStripStatusLabel1.Text = string.Format("File {0} doesn't exist",(i+1));
                 return false;
             }
-            else
-                return true;
-        }
+        return true;
+      }
 
- 
-        private void textBoxSubs_DragLeave(object sender, EventArgs e)
+
+      private void textBoxSubs_DragLeave(object sender, EventArgs e)
         {
                 textBoxSubs.BackColor = Color.FromArgb(255, 255, 255);
         }

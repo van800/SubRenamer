@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
 
 namespace SubRenamer
 {
     public partial class SettingsUC : UserControl
     {
-        //private String textBoxWithSubExts;
-        //private String textBoxWithVideoExtsStr;
+        public bool ConvertToUtf8 {get { return convertToUTF8CheckBox.Checked; }}
 
         private ParentForm m_frmParent;
         private Color backColor;
@@ -25,7 +20,7 @@ namespace SubRenamer
 
         public SettingsUC()
         {
-            InitializeComponent();
+          InitializeComponent();
         }
         public SettingsUC(ParentForm myForm)
         {
@@ -49,8 +44,6 @@ namespace SubRenamer
             textBoxWithVideoExts.Text = m_frmParent.VideoExtensions.ToString();
             textBoxWithSubExts.Text = m_frmParent.SubExtensions.ToString();
             initDirTextBox.Text = m_frmParent.StartFolderString;
-
-            
         }
 
         private void textBoxWithVideoExts_TextChanged(object sender, EventArgs e)

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
+﻿using System.IO;
 
 namespace SubRenamer
 {
@@ -9,7 +6,7 @@ namespace SubRenamer
     {
         public static bool PathIsDirectory(string path)
         {
-            FileInfo info = new FileInfo(path);
+            var info = new FileInfo(path);
             return (info.Attributes & FileAttributes.Directory) == FileAttributes.Directory;
         }
     }
