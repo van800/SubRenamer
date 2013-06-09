@@ -20,7 +20,7 @@ namespace SubRenamer
         }
 
         //public ToolStripUserControl() : base(new UserControl1()) { }
-        public ToolStripUserControl(ParentForm rr) : base(new UserControl1(rr)) { }
-        public ToolStripUserControl(ParentForm rr, Color backColor) : base(new UserControl1(rr, backColor)) { }
+        public ToolStripUserControl(ParentForm rr) : base(new SettingsUC(rr)) { }
+        public ToolStripUserControl(ParentForm rr, Color backColor) : base(new SettingsUC(rr, backColor)) { }
     }
 }

@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace SubRenamer
 {
-    public partial class UserControl1 : UserControl
+    public partial class SettingsUC : UserControl
     {
         //private String textBoxWithSubExts;
         //private String textBoxWithVideoExtsStr;
@@ -23,11 +23,11 @@ namespace SubRenamer
             }
         }
 
-        public UserControl1()
+        public SettingsUC()
         {
             InitializeComponent();
         }
-        public UserControl1(ParentForm myForm)
+        public SettingsUC(ParentForm myForm)
         {
             InitializeComponent();
             backColor = BackColor;
@@ -40,7 +40,7 @@ namespace SubRenamer
 
         }
         
-        public UserControl1(ParentForm myForm, Color backColor)
+        public SettingsUC(ParentForm myForm, Color backColor)
         {
             InitializeComponent();
             BackColor = backColor;

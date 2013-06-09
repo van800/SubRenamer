@@ -59,7 +59,6 @@ namespace SubRenamer
       this.howToUseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.howToUseToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
       this.sToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.convertToUTF8CheckBox = new System.Windows.Forms.CheckBox();
       this.toolStrip1.SuspendLayout();
       this.toolStripContainer1.ContentPanel.SuspendLayout();
       this.toolStripContainer1.SuspendLayout();
@@ -162,7 +161,6 @@ namespace SubRenamer
       // 
       // toolStripContainer1.ContentPanel
       // 
-      this.toolStripContainer1.ContentPanel.Controls.Add(this.convertToUTF8CheckBox);
       this.toolStripContainer1.ContentPanel.Controls.Add(this.splitContainer1);
       this.toolStripContainer1.ContentPanel.Controls.Add(this.splitter1);
       this.toolStripContainer1.ContentPanel.Controls.Add(this.statusStrip1);
@@ -346,18 +344,6 @@ namespace SubRenamer
       this.sToolStripMenuItem.Name = "sToolStripMenuItem";
       this.sToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
       // 
-      // convertToUTF8CheckBox
-      // 
-      this.convertToUTF8CheckBox.AutoSize = true;
-      this.convertToUTF8CheckBox.Checked = true;
-      this.convertToUTF8CheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.convertToUTF8CheckBox.Location = new System.Drawing.Point(307, 4);
-      this.convertToUTF8CheckBox.Name = "convertToUTF8CheckBox";
-      this.convertToUTF8CheckBox.Size = new System.Drawing.Size(105, 17);
-      this.convertToUTF8CheckBox.TabIndex = 14;
-      this.convertToUTF8CheckBox.Text = "Convert to UTF8";
-      this.convertToUTF8CheckBox.UseVisualStyleBackColor = true;
-      // 
       // ParentForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -416,6 +402,5 @@ namespace SubRenamer
         private ToolStripMenuItem aboutToolStripMenuItem;
         private ToolStripMenuItem howToUseToolStripMenuItem;
         private ToolStripMenuItem howToUseToolStripMenuItem2;
-        private CheckBox convertToUTF8CheckBox;
     }
 }

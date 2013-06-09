@@ -112,8 +112,7 @@ namespace SubRenamer
 
         private void btnRename_Click(object sender, EventArgs e)
         {
-            string[] separator = new string[1];
-            separator[0]= Convert.ToString(Environment.NewLine);
+            var separator= Environment.NewLine.ToCharArray();
             string[] sourceText = textBoxSubs.Text.Split(separator, StringSplitOptions.None);
             string[] newNames = textBoxVideos.Text.Split(separator, StringSplitOptions.None);
             int i = 0;
@@ -124,7 +123,7 @@ namespace SubRenamer
                 {
                     if (SourceFileExists(fileName,i))
                     {
-                        string newFileName = Path.GetDirectoryName(newNames[i]).ToString() + "\\" + Path.GetFileNameWithoutExtension(newNames[i]).ToString() + Path.GetExtension(fileName).ToString();
+                        string newFileName = Path.GetDirectoryName(newNames[i]) + "\\" + Path.GetFileNameWithoutExtension(newNames[i]) + Path.GetExtension(fileName);
                         File.Move(fileName, newFileName);
                         resultString = resultString + newFileName + Environment.NewLine;
                     }
@@ -274,8 +273,8 @@ namespace SubRenamer
 
         private void button1_Click(object sender, EventArgs e)
         {
-            PopUpManager<UserControl1> puM =
-                PopUpManager<UserControl1>.GetInstance(button1, false, true);
+            PopUpManager<SettingsUC> puM =
+                PopUpManager<SettingsUC>.GetInstance(button1, false, true);
         }
 
         private void Settings2DropDownButton1_DropDownOpened(object sender, EventArgs e)
