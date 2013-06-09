@@ -35,10 +35,10 @@ namespace SubRenamer
     public static ExtensionList Parse(string myString)
     {
 
-      var separator = new string[1];
+	  var separator = new string[1];
       separator[0] = ";";
-      string[] myStrArray = myString.Split(separator, StringSplitOptions.RemoveEmptyEntries);
-      var myExtList = new ExtensionList();
+      var myStrArray = myString.Split(separator, StringSplitOptions.RemoveEmptyEntries);
+	  var myExtList = new ExtensionList();
       foreach (string ext in myStrArray)
       {
         myExtList.Add(ext);
